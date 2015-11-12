@@ -24,7 +24,7 @@ public class CreateTaskActivity extends AppCompatActivity  {
                 String newTodoText = editText.getText().toString();
 
                 Intent intent = new Intent();
-                intent.putExtra("todoItemText", newTodoText);    // to add its text value to the intent
+                intent.putExtra("todoItemText", newTodoText);
                 setResult(1, intent);
                 finish();
             }
