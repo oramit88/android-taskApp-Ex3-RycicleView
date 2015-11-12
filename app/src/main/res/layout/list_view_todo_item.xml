@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/todoTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="todoItem"
+        android:textSize="16sp"
+        android:textColor="#b439e4"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="55dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignTop="@+id/todoTextView"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/doneButton"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:text="Done"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.18"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignLeft="@+id/todoTextView"
+        android:layout_alignStart="@+id/todoTextView"
+        android:background="#969696"
+        android:textColor="#ecd8f4" />
+
+</RelativeLayout>
+
+   <!--LinearLayout was android:orientation="vertical"
+       android:weightSum="1">-->
+   <!--ImageView was android:layout_height="wrap_content"  -->
+
+
+
