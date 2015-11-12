@@ -22,7 +22,6 @@ public class CreateTaskActivity extends AppCompatActivity  {
             public void onClick(View v) {
                 EditText editText = (EditText) findViewById(R.id.newTaskText);
                 String newTodoText = editText.getText().toString();
-
                 Intent intent = new Intent();
                 intent.putExtra("todoItemText", newTodoText);
                 setResult(1, intent);
