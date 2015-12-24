@@ -1,45 +1,42 @@
 package il.ac.shenkar.todo_app;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ListView;
-import android.widget.Toast;
 
-public class TaskListActivity extends Activity {
 
-    private ITodoController todoController;
-    private TodoListBaseAdapter todoListBaseAdapter;
+public class TaskListActivity extends AppCompatActivity {
+
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    ITodoController controller;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_list);
-        todoController =  new TodoController();
-        ListView  lv = (ListView) findViewById(R.id.listView);
 
-        if(lv != null)
-        {
-            TodoListBaseAdapter adapter = new TodoListBaseAdapter(this, todoController.GetTodoList());
-            lv.setAdapter(adapter);
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-            lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Toast.makeText(TaskListActivity.this, "Item number "+(position+1)+" was clicked" , Toast.LENGTH_LONG).show();
-                }
-            });
-        }
+        controller = new TodoController();
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new TodoListBaseAdapter(controller.GetTodoList());
+        mRecyclerView.setAdapter(mAdapter);
+
 
         Button addNewTaskButton = (Button)this.findViewById(R.id.AddTaskButton);
-        addNewTaskButton.setOnClickListener(new View.OnClickListener(){
+        addNewTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {   // what will happen when we click ADD NEW TASK
-                Intent addTaskActivity = new Intent(v.getContext() , CreateTaskActivity.class);
+                Intent addTaskActivity = new Intent(v.getContext(), CreateTaskActivity.class);
                 startActivityForResult(addTaskActivity, 1);
             }
         });
@@ -50,7 +47,8 @@ public class TaskListActivity extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1){
             String todoItemText = data.getStringExtra("todoItemText").toString();
-            todoController.SetItemToList(new TodoItem(todoItemText, R.drawable.default_pic));
+            controller.SetItemToList(new TodoItem(todoItemText, R.drawable.default_pic));
         }
     }
+
 }
